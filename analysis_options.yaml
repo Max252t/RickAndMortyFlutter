@@ -1,0 +1,25 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - ios/**
+  language:
+    # Неявные dynamic и касты — частый источник «оно же компилировалось».
+    strict-casts: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    # const — не косметика: константное поддерево не пересобирается (Л2).
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_locals: true
+    # Подписи в коде ловит скрипт и глаз, а это — поздний context после await.
+    use_build_context_synchronously: true
