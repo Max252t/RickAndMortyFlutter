@@ -1,0 +1,66 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Рик и Морти",
+  "@appTitle": {
+    "description": "Заголовок в шапке и во вкладке браузера"
+  },
+  "actionToggleTheme": "Переключить тему",
+  "actionToggleLanguage": "Сменить язык",
+  "languageCode": "RU",
+  "@languageCode": {
+    "description": "Код текущего языка на кнопке смены языка"
+  },
+  "searchHint": "Поиск по имени",
+  "actionClearSearch": "Очистить поиск",
+  "listNotFound": "По запросу «{query}» никого не нашли",
+  "@listNotFound": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "statusAlive": "Жив",
+  "statusDead": "Мёртв",
+  "statusUnknown": "Неизвестно",
+  "genderFemale": "Женский",
+  "genderMale": "Мужской",
+  "genderGenderless": "Бесполый",
+  "genderUnknown": "Неизвестно",
+  "sectionInfo": "Досье",
+  "sectionNeighbours": "Сейчас там же",
+  "@sectionNeighbours": {
+    "description": "Персонажи, которых последний раз видели в той же локации"
+  },
+  "detailStatus": "Статус",
+  "detailSpecies": "Вид",
+  "detailType": "Подвид",
+  "detailGender": "Пол",
+  "detailOrigin": "Происхождение",
+  "detailLocation": "Последнее местоположение",
+  "detailEpisodes": "Эпизодов",
+  "detailCreated": "Добавлен в каталог",
+  "createdDate": "{date}",
+  "@createdDate": {
+    "description": "Дата в формате текущего языка",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMMd"
+      }
+    }
+  },
+  "detailNotFound": "Персонажа №{id} в каталоге нет",
+  "@detailNotFound": {
+    "description": "Номер из адресной строки не нашёлся",
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "pageNotFound": "Такой страницы нет",
+  "@pageNotFound": {
+    "description": "Адрес, которого нет среди маршрутов"
+  }
+}
