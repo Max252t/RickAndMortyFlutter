@@ -1,0 +1,39 @@
+name: rickandmortyflutter
+description: "Каталог персонажей «Рика и Морти» — ЛР2 «Каркас на Flutter»"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  go_router: ^18.0.1
+  intl: ^0.20.3
+  bloc_concurrency: ^0.3.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # Код AppLocalizations генерируется из lib/l10n/*.arb при pub get и сборке.
+  generate: true
+  # Аватары лежат в репозитории: сети в ЛР2 нет, она появится в ЛР3.
+  assets:
+    - assets/avatars/
+  # Шрифт тоже локально: без него web-сборка идёт за Roboto на
+  # fonts.gstatic.com, и без сети кириллица не рисуется. Лицензия Apache 2.0.
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
