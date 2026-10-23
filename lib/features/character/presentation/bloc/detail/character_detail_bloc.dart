@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rickandmortyflutter/common/network/load_exception.dart';
 import 'package:rickandmortyflutter/features/character/domain/character_model.dart';
 import 'package:rickandmortyflutter/features/character/domain/i_character_repository.dart';
 import 'package:rickandmortyflutter/features/character/presentation/bloc/detail/character_detail_event.dart';
@@ -8,32 +9,35 @@ class CharacterDetailBloc
     extends Bloc<CharacterDetailEvent, CharacterDetailState> {
   CharacterDetailBloc(this._repository)
     : super(const CharacterDetailLoading()) {
-    on<CharacterDetailOpened>(_onOpened);
+    on<CharacterDetailOpened>(_onLoadRequested);
+    on<CharacterDetailRetried>(_onLoadRequested);
   }
 
   final ICharacterRepository _repository;
 
-  Future<void> _onOpened(
-    CharacterDetailOpened event,
+  Future<void> _onLoadRequested(
+    CharacterDetailEvent event,
     Emitter<CharacterDetailState> emit,
   ) async {
-    final character = await _repository.getCharacter(event.id);
-    if (character == null) {
+    emit(const CharacterDetailLoading());
+    try {
+      final character = await _repository.getCharacter(event.id);
+      final neighbours = await _loadNeighbours(character);
+      emit(CharacterDetailLoaded(character, neighbours: neighbours));
+    } on NotFoundException {
       emit(CharacterDetailNotFound(event.id));
-      return;
+    } on LoadException catch (error) {
+      emit(CharacterDetailFailure(event.id, error));
     }
+  }
+
+  Future<List<CharacterModel>> _loadNeighbours(CharacterModel character) async {
     final locationId = character.location.id;
-    final residents = locationId == null
-        ? const <CharacterModel>[]
-        : await _repository.getResidents(locationId);
-    emit(
-      CharacterDetailLoaded(
-        character,
-        neighbours: [
-          for (final resident in residents)
-            if (resident.id != character.id) resident,
-        ],
-      ),
-    );
+    if (locationId == null) return const [];
+    try {
+      return await _repository.getResidents(locationId, exceptId: character.id);
+    } on NotFoundException {
+      return const [];
+    }
   }
 }

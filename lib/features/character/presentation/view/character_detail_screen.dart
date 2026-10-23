@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rickandmortyflutter/common/widgets/app_scaffold.dart';
 import 'package:rickandmortyflutter/common/widgets/centered_message.dart';
+import 'package:rickandmortyflutter/common/widgets/load_error_view.dart';
 import 'package:rickandmortyflutter/features/character/domain/character_model.dart';
 import 'package:rickandmortyflutter/features/character/domain/i_character_repository.dart';
 import 'package:rickandmortyflutter/features/character/presentation/bloc/detail/character_detail_bloc.dart';
@@ -35,6 +36,14 @@ class CharacterDetailScreen extends StatelessWidget {
             CharacterDetailNotFound(:final id) => CenteredMessage(
               icon: Icons.person_off,
               text: AppLocalizations.of(context).detailNotFound(id),
+            ),
+            CharacterDetailFailure(:final id, :final error) => Center(
+              child: LoadErrorView(
+                error: error,
+                onRetry: () => context.read<CharacterDetailBloc>().add(
+                  CharacterDetailRetried(id),
+                ),
+              ),
             ),
             CharacterDetailLoaded(:final character, :final neighbours) =>
               _DetailContent(character: character, neighbours: neighbours),
