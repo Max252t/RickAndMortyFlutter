@@ -33,8 +33,8 @@ class CharacterAvatar extends StatelessWidget {
       ),
       child: character.image.isEmpty
           ? placeholder
-          : Image(
-              image: character.imageProvider,
+          : Image.network(
+              character.image,
               width: size,
               height: size,
               fit: BoxFit.cover,

@@ -12,10 +12,6 @@ extension CharacterFormat on CharacterModel {
       .join();
 
   String? get displayType => type.isEmpty ? null : type;
-
-  ImageProvider get imageProvider => image.startsWith('http')
-      ? NetworkImage(image)
-      : AssetImage(image) as ImageProvider;
 }
 
 extension CharacterStatusFormat on CharacterStatus {
