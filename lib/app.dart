@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rickandmortyflutter/common/locale/locale_bloc.dart';
 import 'package:rickandmortyflutter/common/navigation/app_router.dart';
+import 'package:rickandmortyflutter/common/network/dio_client.dart';
 import 'package:rickandmortyflutter/common/theme/app_theme.dart';
 import 'package:rickandmortyflutter/common/theme/theme_bloc.dart';
+import 'package:rickandmortyflutter/features/character/data/api/character_api.dart';
 import 'package:rickandmortyflutter/features/character/data/character_repository.dart';
+import 'package:rickandmortyflutter/features/character/data/data_sources/network_character_data_source.dart';
 import 'package:rickandmortyflutter/features/character/domain/i_character_repository.dart';
 import 'package:rickandmortyflutter/features/character/presentation/bloc/list/character_list_bloc.dart';
 import 'package:rickandmortyflutter/features/character/presentation/bloc/list/character_list_event.dart';
@@ -18,7 +21,9 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ICharacterRepository>(
-          create: (_) => const CharacterRepository(),
+          create: (_) => CharacterRepository(
+            NetworkCharacterDataSource(CharacterApi(DioClient.create())),
+          ),
         ),
       ],
       child: MultiBlocProvider(
