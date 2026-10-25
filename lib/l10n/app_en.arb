@@ -26,5 +26,11 @@
   "detailCreated": "Added to catalog",
   "createdDate": "{date}",
   "detailNotFound": "No character #{id} in the catalog",
+  "errorNoConnection": "Can't reach the server. Check your connection",
+  "errorTimeout": "The server is taking too long to respond",
+  "errorNotFound": "No such record",
+  "errorServer": "Server error ({code})",
+  "errorBadResponse": "The server sent an unexpected response",
+  "actionRetry": "Retry",
   "pageNotFound": "No such page"
 }

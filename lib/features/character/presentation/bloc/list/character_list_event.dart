@@ -11,3 +11,11 @@ final class CharacterListQueryChanged extends CharacterListEvent {
 
   final String query;
 }
+
+final class CharacterListRetried extends CharacterListEvent {
+  const CharacterListRetried();
+}
+
+final class CharacterListNextPageRequested extends CharacterListEvent {
+  const CharacterListNextPageRequested();
+}
