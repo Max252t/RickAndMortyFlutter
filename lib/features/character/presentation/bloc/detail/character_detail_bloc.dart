@@ -36,7 +36,7 @@ class CharacterDetailBloc
     if (locationId == null) return const [];
     try {
       return await _repository.getResidents(locationId, exceptId: character.id);
-    } on NotFoundException {
+    } on LoadException {
       return const [];
     }
   }
